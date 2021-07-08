@@ -4,6 +4,9 @@
 
 #include "font8x8_basic.h"
 
+#define ROW_COUNT 8
+#define COL_COUNT 8
+
 void usage(char *exec) {
     printf("Usage: %s <char_code>\n", exec);
     printf("       <char_code> Decimal character code between 0 and 127\n");
@@ -20,20 +23,20 @@ void render(char *bitmap, int ord) {
     }
     printf("\n");
 
-    for (x=0; x < 8; x++) {
-      printf("      (");
-        for (y=0; y < 8; y++) {
+    for (x=0; x < ROW_COUNT; x++) {
+        printf("      (");
+        for (y=0; y < COL_COUNT; y++) {
             set = bitmap[x] & 1 << y;
             printf("%s", set ? "'1'" : "'0'");
-	    if (y < 8 - 1) {
-	      printf(", ");
-	    }
+            if (y < COL_COUNT - 1) {
+                printf(", ");
+            }
         }
-	if (x < 8 - 1) {
-	    printf("),\n");
-	} else {
-	    printf(")\n");
-	}
+        if (x < ROW_COUNT - 1) {
+            printf("),\n");
+        } else {
+            printf(")\n");
+        }
     }
     printf("    )");
 }
