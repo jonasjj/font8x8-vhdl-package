@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "font8x8_basic.h"
+#include "font5x7_basic.h"
 
 #define ROW_COUNT 8
 #define COL_COUNT 8
@@ -23,7 +23,7 @@ void render(char *bitmap, int ord) {
     }
     printf("\n");
 
-    for (x=0; x < ROW_COUNT; x++) {
+    for (x=ROW_COUNT - 1; x >= 0; x--) {
         printf("      (");
         for (y=0; y < COL_COUNT; y++) {
             set = bitmap[x] & 1 << y;
@@ -32,7 +32,7 @@ void render(char *bitmap, int ord) {
                 printf(", ");
             }
         }
-        if (x < ROW_COUNT - 1) {
+        if (x > 0) {
             printf("),\n");
         } else {
             printf(")\n");
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
   
     int ord;
     for (ord = 0; ord < 128; ord++) {
-        char *bitmap = font8x8_basic[ord];
+        char *bitmap = font5x7_basic[ord];
 	render(bitmap, ord);
 	if (ord < 128 -1) {
 	     printf(",\n");
